@@ -1,0 +1,72 @@
+{
+    "busbarSeries": [
+        {
+            "name": "Троллейный 60A 5 жил (медь)",
+            "type": "TROLLEY",
+            "amperage": 60,
+            "phases": 5,
+            "material": "copper",
+            "components": ["Корпус 1м", "Подвес", "Подвод питания", "Заглушка", "Кронштейн"]
+        },
+        {
+            "name": "Монотроллейный 100A 3 жил (алюминий)",
+            "type": "MONO",
+            "amperage": 100,
+            "phases": 3,
+            "material": "aluminum",
+            "components": ["Корпус 2м", "Подвес", "Соединитель", "Подвод питания", "Заглушка"]
+        }
+    ],
+
+    "components": [
+        {
+            "name": "Корпус 1м",
+            "slug": "housing-1m",
+            "category": "HOUSING",
+            "compatibleFor": ["TROLLEY", "MONO"],
+            "params": { "length": 1, "material": "aluminum" }
+        },
+        {
+            "name": "Корпус 2м",
+            "slug": "housing-2m",
+            "category": "HOUSING",
+            "compatibleFor": ["TROLLEY", "MONO"],
+            "params": { "length": 2, "material": "aluminum" }
+        },
+        {
+            "name": "Подвес",
+            "slug": "support",
+            "category": "SUPPORT",
+            "compatibleFor": ["TROLLEY", "MONO"],
+            "params": { "mount_type": "ceiling" }
+        },
+        {
+            "name": "Подвод питания",
+            "slug": "feed",
+            "category": "FEED",
+            "compatibleFor": ["TROLLEY", "MONO"],
+            "params": { "voltage": 380 }
+        },
+        {
+            "name": "Соединитель",
+            "slug": "connector",
+            "category": "CONNECTOR",
+            "compatibleFor": ["MONO"],
+            "params": { "type": "mechanical" }
+        },
+        {
+            "name": "Заглушка",
+            "slug": "end-cap",
+            "category": "END_CAP",
+            "compatibleFor": ["TROLLEY", "MONO"],
+            "params": { "sealed": true }
+        },
+        {
+            "name": "Кронштейн",
+            "slug": "bracket",
+            "category": "ACCESSORY",
+            "compatibleFor": ["TROLLEY"],
+            "params": { "mount_type": "wall" }
+        }
+    ]
+}
