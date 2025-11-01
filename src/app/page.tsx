@@ -1,11 +1,11 @@
 'use client';
 
-import useConfigurator from './configurator/hooks/useConfigurator';
-import BusbarTypeStep from './configurator/components/BusbarTypeStep';
-import ParametersStep from './configurator/components/ParametersStep';
-import ComponentsStep from './configurator/components/ComponentsStep';
-import SummaryStep from './configurator/components/SummaryStep';
-import ProgressBar from './configurator/components/ProgressBar';
+import useConfigurator from '../components/configurator/hooks/useConfigurator';
+import BusbarTypeStep from '../components/configurator/components/BusbarTypeStep';
+import ParametersStep from '../components/configurator/components/ParametersStep';
+import ComponentsStep from '../components/configurator/components/ComponentsStep';
+import SummaryStep from '../components/configurator/components/SummaryStep';
+import ProgressBar from '../components/configurator/components/ProgressBar';
 
 // Моковые данные для компонентов (замени на реальные из API)
 const MOCK_COMPONENTS = [
