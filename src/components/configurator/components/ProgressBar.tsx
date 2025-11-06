@@ -1,7 +1,6 @@
 // components/configurator/ProgressBar.tsx
 'use client';
 
-import React from 'react';
 import { cn } from '@/lib/utils'; // если используешь clsx или свой утилитарный helper
 
 type ProgressStep = {
