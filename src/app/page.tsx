@@ -6,6 +6,7 @@ import ParametersStep from '../components/configurator/components/ParametersStep
 import ComponentsStep from '../components/configurator/components/ComponentsStep';
 import SummaryStep from '../components/configurator/components/SummaryStep';
 import ProgressBar from '../components/configurator/components/ProgressBar';
+import { MetaballGradient } from '@/components/configurator/components/MetaballGradient';
 
 // Моковые данные для компонентов (замени на реальные из API)
 const MOCK_COMPONENTS = [
