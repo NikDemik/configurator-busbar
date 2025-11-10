@@ -2,25 +2,50 @@
 
 import { Button } from '@/components/ui/button';
 import { BusbarTypeStepProps } from '@/types/configurator';
-import { BusbarType, BUSBAR_TYPE_LABELS, BUSBAR_TYPES } from '@/types/busbar';
+import { BusbarTypeFromDB } from '@/types/configurator';
+import { BUSBAR_TYPE_LABELS } from '@/types/busbar';
 
-export default function BusbarTypeStep({ next, update, currentType }: BusbarTypeStepProps) {
-    const handleTypeSelect = (type: BusbarType) => {
-        update({ busbarType: type });
-        next();
-    };
+interface ExtendedBusbarTypeStepProps extends BusbarTypeStepProps {
+    busbarTypes: BusbarTypeFromDB[];
+    loading?: boolean;
+}
+
+export default function BusbarTypeStep({
+    next,
+    update,
+    currentType,
+    busbarTypes,
+    loading = false,
+}: ExtendedBusbarTypeStepProps) {
+    if (loading) {
+        return (
+            <div className="space-y-6">
+                <h2 className="text-2xl font-semibold">Выберите тип шинопровода</h2>
+                <div className="grid grid-cols-2 gap-6">
+                    {[1, 2].map((item) => (
+                        <div key={item} className="h-20 bg-gray-200 animate-pulse rounded-lg"></div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Выберите тип шинопровода</h2>
             <div className="grid grid-cols-2 gap-6">
-                {BUSBAR_TYPES.map((type) => (
+                {busbarTypes.map((type) => (
                     <Button
-                        key={type}
-                        onClick={() => handleTypeSelect(type)}
-                        variant={currentType === type ? 'default' : 'outline'}
+                        key={type.id}
+                        variant={currentType === type.code ? 'default' : 'outline'}
+                        className="h-20 flex flex-col items-center justify-center p-4"
+                        onClick={() => {
+                            update({ busbarType: type.code });
+                            next();
+                        }}
                     >
-                        {BUSBAR_TYPE_LABELS[type]}
+                        <span className="text-lg font-medium">{type.name}</span>
+                        <span className="text-sm text-gray-600 mt-1">{type.description}</span>
                     </Button>
                 ))}
             </div>

@@ -1,8 +1,9 @@
 // components/configurator/hooks/useConfigurator.ts
 'use client';
 
-import { useState } from 'react';
-import { ConfiguratorState } from '@/types/configurator';
+import { useState, useEffect } from 'react';
+import { ConfiguratorState, BusbarType, ComponentFromDB } from '@/types/configurator';
+import { ConfiguratorService, ComponentService } from '@/services';
 
 export default function useConfigurator() {
     const [config, setConfig] = useState<ConfiguratorState>({
@@ -12,6 +13,49 @@ export default function useConfigurator() {
         phases: undefined,
         components: [], // Теперь это массив ID (number[])
     });
+
+    const [availableComponents, setAvailableComponents] = useState<ComponentFromDB[]>([]);
+    const [busbarTypes, setBusbarTypes] = useState<any[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    // Загрузка типов шинопроводов при инициализации
+    useEffect(() => {
+        loadBusbarTypes();
+    }, []);
+
+    // Загрузка компонентов при выборе типа шины
+    useEffect(() => {
+        if (config.busbarType) {
+            loadComponents(config.busbarType);
+        }
+    }, [config.busbarType]);
+
+    const loadBusbarTypes = async () => {
+        setLoading(true);
+        try {
+            const types = await ConfiguratorService.getBusbarTypes();
+            setBusbarTypes(types);
+        } catch (err) {
+            setError('Ошибка загрузки типов шинопроводов');
+            console.error('Failed to load busbar types:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const loadComponents = async (busbarType: string) => {
+        setLoading(true);
+        try {
+            const components = await ConfiguratorService.getComponentsByBusbarType(busbarType);
+            setAvailableComponents(components);
+        } catch (err) {
+            setError('Ошибка загрузки компонентов');
+            console.error('Failed to load components:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const next = () => {
         setConfig((c) => ({
@@ -65,10 +109,16 @@ export default function useConfigurator() {
             phases: undefined,
             components: [],
         });
+        setAvailableComponents([]);
+        setError(null);
     };
 
     return {
         config,
+        availableComponents,
+        busbarTypes,
+        loading,
+        error,
         next,
         prev,
         update,
