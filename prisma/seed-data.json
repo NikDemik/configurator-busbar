@@ -67,6 +67,13 @@
             "category": "ACCESSORY",
             "compatibleFor": ["TROLLEY"],
             "params": { "mount_type": "wall" }
+        },
+        {
+            "name": "Кронштейн фестонный",
+            "slug": "bracket",
+            "category": "ACCESSORY",
+            "compatibleFor": ["FESTON"],
+            "params": { "mount_type": "wall" }
         }
     ]
 }

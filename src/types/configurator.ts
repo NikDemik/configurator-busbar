@@ -13,7 +13,7 @@ export interface Component {
     isActive?: boolean; // Активен ли компонент в системе
 }
 
-export type BusbarType = 'TROLLEY' | 'MONO';
+import { BusbarType } from '../../prisma/generated/prisma/client';
 
 export interface ConfiguratorState {
     step: number;

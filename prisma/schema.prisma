@@ -23,7 +23,7 @@ model BusbarSeries {
   material   String // copper / aluminum
   components Component[]   @relation("SeriesComponents")
   
-  @@map("busbar_series")
+  @@map("busbarSeries")
 }
 
 model Component {
@@ -35,7 +35,7 @@ model Component {
   params        Json?
   series        BusbarSeries[] @relation("SeriesComponents")
   
-  @@map("components")
+  @@map("component")
 }
 
 model Config {
@@ -49,12 +49,13 @@ model Config {
   components  Json // хранится массив выбранных компонентов
   createdAt   DateTime   @default(now())
   
-  @@map("configs")
+  @@map("config")
 }
 
 enum BusbarType {
   TROLLEY
   MONO
+  FESTON
 }
 
 enum ComponentCategory {

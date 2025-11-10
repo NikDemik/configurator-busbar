@@ -10,7 +10,8 @@
 
 export const BusbarType = {
   TROLLEY: 'TROLLEY',
-  MONO: 'MONO'
+  MONO: 'MONO',
+  FESTON: 'FESTON'
 } as const
 
 export type BusbarType = (typeof BusbarType)[keyof typeof BusbarType]
